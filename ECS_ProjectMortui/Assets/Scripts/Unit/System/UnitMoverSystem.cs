@@ -31,7 +31,7 @@ public partial struct UnitMoverJob : IJobEntity
     public void Execute(in UnitMover unitMover,ref LocalTransform localTransform,ref PhysicsVelocity physicsVelocity)
     {
 
-        float3 moveDirection = new float3(0, 0, 0) - localTransform.Position;
+        float3 moveDirection = unitMover.targetPosition - localTransform.Position;
 
         float targetDistanceToStop = 2.0f;
 
