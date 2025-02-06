@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class SelectedAuthoring : MonoBehaviour
 {
-    public bool selected;
+    public float showScale;
+    public GameObject visualEntityGameObject;
     public class Baker: Baker<SelectedAuthoring>
     {
         public override void Bake(SelectedAuthoring authoring)
@@ -12,7 +13,8 @@ public class SelectedAuthoring : MonoBehaviour
 
             AddComponent(entity, new Selected
             {
-                selected = authoring.selected,
+                showScale = authoring.showScale,
+                visualEntity = GetEntity(authoring.visualEntityGameObject,TransformUsageFlags.Dynamic)
             });
 
             SetComponentEnabled<Selected>(entity, false);
@@ -22,7 +24,8 @@ public class SelectedAuthoring : MonoBehaviour
 
 public struct Selected : IComponentData,IEnableableComponent
 {
-    public bool selected;
+    public Entity visualEntity;
     public bool OnSelected;
     public bool OnDeselected;
+    public float showScale;
 }

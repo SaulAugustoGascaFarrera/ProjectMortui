@@ -48,6 +48,12 @@ partial struct BulletSystem : ISystem
             if(math.distancesq(localTrasform.ValueRO.Position,targetLocalTransform.ValueRO.Position) < distanceToDestroy)
             {
                 entityCommandBuffer.DestroyEntity(entity);
+
+                RefRW<Health> targetHealth = SystemAPI.GetComponentRW<Health>(target.ValueRO.targetEntity);
+                targetHealth.ValueRW.onHealthChange = true;
+                targetHealth.ValueRW.healthAmount -= bullet.ValueRO.damageAmount;
+
+
             }
 
 

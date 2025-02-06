@@ -174,7 +174,7 @@ PrefabInstance:
     - target: {fileID: 703496882999228515, guid: a5501f03a2b7f7b4bbe5d38ea74b5408, type: 3}
       propertyPath: testTargetEntity
       value: 
-      objectReference: {fileID: 1888284708}
+      objectReference: {fileID: 0}
     - target: {fileID: 1023223704322756730, guid: a5501f03a2b7f7b4bbe5d38ea74b5408, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.5
@@ -305,11 +305,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1e54aadde9fbad4197f9225cc634d97, type: 3}
---- !u!1 &1888284708 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100194021511777474, guid: f1e54aadde9fbad4197f9225cc634d97, type: 3}
-  m_PrefabInstance: {fileID: 1888284707}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

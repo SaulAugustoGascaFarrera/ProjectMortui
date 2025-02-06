@@ -2,6 +2,7 @@ using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine.InputSystem.Haptics;
 
 partial struct ShootAttackSystem : ISystem
 {
@@ -16,7 +17,7 @@ partial struct ShootAttackSystem : ISystem
     {
         EntitiesReference entitiesReference = SystemAPI.GetSingleton<EntitiesReference>();  
 
-        foreach((RefRO<Target> target,RefRW<ShootAttack> shootAttack,RefRW<LocalTransform> localTransform,RefRW<UnitMover> unitMover) in SystemAPI.Query<RefRO<Target>, RefRW<ShootAttack>, RefRW<LocalTransform>, RefRW<UnitMover>>())
+        foreach((RefRO<Target> target,RefRW<ShootAttack> shootAttack,RefRW<LocalTransform> localTransform,RefRW<UnitMover> unitMover) in SystemAPI.Query<RefRO<Target>, RefRW<ShootAttack>, RefRW<LocalTransform>, RefRW<UnitMover>>().WithDisabled<MoveOverride>())
         {
             if(!SystemAPI.Exists(target.ValueRO.targetEntity))
             {
@@ -59,8 +60,6 @@ partial struct ShootAttackSystem : ISystem
             shootAttack.ValueRW.timer = shootAttack.ValueRO.timerMax;
 
 
-
-
             Entity bulletPrefab = state.EntityManager.Instantiate(entitiesReference.bulletEntity);
             float3 bulletSpawnPoint = localTransform.ValueRO.TransformPoint(shootAttack.ValueRO.spawnPointLocation);
             SystemAPI.SetComponent(bulletPrefab, LocalTransform.FromPosition(bulletSpawnPoint));
@@ -80,3 +79,15 @@ partial struct ShootAttackSystem : ISystem
 
     
 }
+
+//[BurstCompile]
+//public partial struct ShootAttackJob : IJobEntity
+//{
+//    public void Execute(in Target target,ref ShootAttack shootAttack,ref UnitMover unitMover,ref LocalTransform localTransform)
+//    {
+//        if (!SystemAPI.Exists(target.targetEntity))
+//        {
+
+//        }
+//    }
+//}
